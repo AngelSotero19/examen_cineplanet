@@ -1,0 +1,18 @@
+service: secure-card
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  app:
+    handler: dist/main
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+plugins:
+  - serverless-offline
